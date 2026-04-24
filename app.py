@@ -168,6 +168,16 @@ def webhook_call_status():
     return str(twiml), 200, {"Content-Type": "text/xml"}
 
 
+@app.route("/admin/test-sms/<phone>", methods=["GET"])
+def test_sms(phone):
+    try:
+        from sms import send_sms
+        sid = send_sms(f"+1{phone}", "Test: Revenue Pro Systems text-back is working!")
+        return f"SMS sent! SID: {sid}", 200
+    except Exception as e:
+        return f"ERROR: {str(e)}", 500
+
+
 @app.route("/admin/reset-leads", methods=["GET"])
 def reset_leads():
     db.session.query(Lead).delete()
