@@ -116,13 +116,13 @@ def webhook_call():
 
     # Forward to your real number; adjust or remove as needed.
     forward_to = os.environ.get("FORWARD_TO_NUMBER", "")
+    base_url = request.url_root.rstrip("/")
     if forward_to:
-        dial = twiml.dial(action="/webhook/call-status", timeout="20")
+        dial = twiml.dial(action=f"{base_url}/webhook/call-status", timeout="20")
         dial.number(forward_to)
     else:
-        # No forwarding — just play a message and hang up, triggering fallback.
         twiml.say("Please hold while we connect you.")
-        twiml.hangup()
+        twiml.redirect(f"{base_url}/webhook/call-status")
 
     return str(twiml), 200, {"Content-Type": "text/xml"}
 
