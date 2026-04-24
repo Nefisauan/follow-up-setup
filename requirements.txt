@@ -1,0 +1,7 @@
+flask>=3.0,<4
+flask-sqlalchemy>=3.1,<4
+twilio>=9.0,<10
+apscheduler>=3.10,<4
+sqlalchemy>=2.0,<3
+python-dotenv>=1.0,<2
+gunicorn>=22.0,<23

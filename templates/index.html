@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revenue Pro Systems — Book a Free Consultation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Revenue Pro Systems</h1>
+      <p class="tagline">Local service businesses — more leads, more bookings, less missed calls.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Get a Free Consultation</h2>
+      <p class="sub">Fill in your details and we'll reach out within minutes.</p>
+
+      <form action="/submit-lead" method="POST" novalidate>
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Jane Smith"
+            required
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number <span class="required">*</span></label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="(555) 867-5309"
+            required
+            autocomplete="tel"
+          />
+        </div>
+
+        <div class="field">
+          <label for="service">What service do you need?</label>
+          <select id="service" name="service">
+            <option value="" disabled selected>Select a service…</option>
+            <option value="Missed Call Text-Back">Missed Call Text-Back</option>
+            <option value="Lead Follow-Up Automation">Lead Follow-Up Automation</option>
+            <option value="Full Automation Package">Full Automation Package</option>
+            <option value="Other">Other / Not sure yet</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">Get My Free Consultation →</button>
+      </form>
+    </section>
+
+    <section class="booking-section">
+      <h2>Or Book a Time Directly</h2>
+      <p>Choose a slot that works for you — no phone tag required.</p>
+      <a href="{{ calendly_link }}" target="_blank" rel="noopener" class="btn-secondary">
+        Open Booking Calendar
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Revenue Pro Systems. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

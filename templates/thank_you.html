@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You — Revenue Pro Systems</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Revenue Pro Systems</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-section thank-you">
+      <div class="checkmark">✓</div>
+      <h2>You're all set, {{ name or 'friend' }}!</h2>
+      <p>We just sent you a text with our booking link. Expect a follow-up from us very soon.</p>
+      <a href="/" class="btn-secondary">← Back to Home</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Revenue Pro Systems. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
