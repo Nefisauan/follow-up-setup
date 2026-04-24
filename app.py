@@ -121,8 +121,21 @@ def webhook_call():
         dial = twiml.dial(action=f"{base_url}/webhook/call-status", timeout="20")
         dial.number(forward_to)
     else:
-        twiml.say("Please hold while we connect you.")
-        twiml.redirect(f"{base_url}/webhook/call-status")
+        # No forwarding — treat every call as missed, send text immediately
+        caller = request.form.get("From", "")
+        if caller:
+            from sms import send_sms
+            lead = _get_or_create_lead(caller, source="missed_call")
+            if not lead.followup_day1_sent:
+                try:
+                    send_sms(caller, _missed_call_msg())
+                    lead.followup_day1_sent = True
+                    db.session.commit()
+                    log.info("Missed-call SMS sent to %s", caller)
+                except Exception:
+                    log.exception("Failed to send missed-call SMS to %s", caller)
+        twiml.say("You've reached Revenue Pro Systems. We're unavailable right now but we just sent you a text with our booking link. Talk soon!")
+        twiml.hangup()
 
     return str(twiml), 200, {"Content-Type": "text/xml"}
 
