@@ -168,6 +168,13 @@ def webhook_call_status():
     return str(twiml), 200, {"Content-Type": "text/xml"}
 
 
+@app.route("/admin/reset-leads", methods=["GET"])
+def reset_leads():
+    db.session.query(Lead).delete()
+    db.session.commit()
+    return "All leads cleared. Ready for a fresh test.", 200
+
+
 @app.route("/webhook/booking", methods=["POST"])
 def webhook_booking():
     """
